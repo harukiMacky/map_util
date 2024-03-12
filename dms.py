@@ -1,4 +1,4 @@
-class GridDMS:
+class PointDMS:
     """緯度経度の60進法を表すクラス
     度、分、秒の情報を格納する。
     """

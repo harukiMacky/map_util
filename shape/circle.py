@@ -6,6 +6,16 @@ import re
 
 
 class CircleZone:
+    """円を表すクラス
+
+    Attributes
+    ----------
+    radius : float
+        半径[km]
+    center : Point
+        中心の座標（緯度経度）
+    """
+
     def __init__(self, radius: float, center: Point) -> None:
         """円を定義する
 

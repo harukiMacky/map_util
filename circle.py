@@ -30,7 +30,7 @@ class CircleZone:
         """
         theta = 0
         point_list = []
-        while theta < 2 * numpy.pi:
+        while theta <= 2 * numpy.pi:
             x = self.center["coordinates"][0] + self.radius * numpy.cos(theta)
             y = self.center["coordinates"][1] + self.radius * numpy.cos(theta)
             point_list.append([x, y])

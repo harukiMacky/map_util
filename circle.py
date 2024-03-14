@@ -1,6 +1,5 @@
 from geojson import Polygon, Point
 import numpy
-import json
 
 
 class CircleZone:
@@ -38,7 +37,3 @@ class CircleZone:
             theta += precision
 
         return Polygon(coordinates=[point_list])
-
-
-circle = CircleZone(5, Point([0, 0]))
-print(json.dumps(circle.get_polygon()))

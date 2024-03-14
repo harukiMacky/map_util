@@ -1,4 +1,4 @@
-from geojson import Polygon, FeatureCollection
+from geojson import Polygon
 
 
 class Area:

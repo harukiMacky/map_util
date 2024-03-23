@@ -29,9 +29,9 @@ class CircleZone:
         self.radius = radius
         self.center = center
 
-    def _calc_radius(self) -> float:
+    def _calc_x_radius(self) -> float:
         """
-        クラス属性の半径(km)から、地図の座標上での半径を求める。
+        クラス属性の半径(km)から、地図の座標上での半径（経度用）を求める。
         """
         center_point: list[str] = self.center.format_decimal()
         outside_point = (
@@ -44,6 +44,22 @@ class CircleZone:
         outside_coordinate: list[str] = outside_point.replace(" ", "").split(",")
 
         return abs(float(outside_coordinate[1]) - float(center_coordinate[1]))
+
+    def _calc_y_radius(self) -> float:
+        """
+        クラス属性の半径(km)から、地図の座標上での半径（緯度用）を求める。
+        """
+        center_point: list[str] = self.center.format_decimal()
+        outside_point = (
+            distance.distance(kilometers=self.radius).destination(
+                point=(self.center), bearing=0
+            )
+        ).format_decimal()
+
+        center_coordinate: list[str] = center_point.replace(" ", "").split(",")
+        outside_coordinate: list[str] = outside_point.replace(" ", "").split(",")
+
+        return abs(float(outside_coordinate[0]) - float(center_coordinate[0]))
 
     def get_polygon(self, precision: float = 0.01) -> Polygon:
         """
@@ -61,8 +77,8 @@ class CircleZone:
         theta = 0
         point_list = []
         while theta <= 2 * numpy.pi:
-            x = self.center[1] + self._calc_radius() * numpy.cos(theta)
-            y = self.center[0] + self._calc_radius() * numpy.sin(theta)
+            x = self.center[1] + self._calc_x_radius() * numpy.cos(theta)
+            y = self.center[0] + self._calc_y_radius() * numpy.sin(theta)
             point_list.append([x, y])
             theta += precision
 

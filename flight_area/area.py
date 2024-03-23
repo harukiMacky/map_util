@@ -23,13 +23,13 @@ class Area:
         self.point_list = self._convert_point_for_geojson(point_list)
         self.maximum_altitude = maximum_altitude
 
-    def _convert_point_for_geojson(self, point_list) -> list:
+    def _convert_point_for_geojson(self, point_list: list[Point]) -> list:
         """
         ポイントをgeojsonように変換する。
         """
         converted_point_list = []
         for p in point_list:
-            point_str = p.decimal_format()
+            point_str = p.format_decimal()
             point_str = point_str.replace(" ", "").split(",")
             converted_point_list.append([float(point_str[1]), float(point_str[0])])
 
@@ -43,6 +43,6 @@ class Area:
         if self.point_list[0] != self.point_list[-1]:
             self.point_list.append(self.point_list[0])
 
-        area_info = self.name + " : " + self.maximum_altitude + " ft"
+        area_info = self.name + " : " + str(self.maximum_altitude) + " ft"
 
         return Polygon(coordinates=[self.point_list], properties={"name": area_info})

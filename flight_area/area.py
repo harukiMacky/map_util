@@ -1,4 +1,4 @@
-from geojson import Polygon
+from geojson import Polygon, Feature
 from geopy import Point
 
 
@@ -45,4 +45,7 @@ class Area:
 
         area_info = self.name + " : " + str(self.maximum_altitude) + " ft"
 
-        return Polygon(coordinates=[self.point_list], properties={"name": area_info})
+        return Feature(
+            geometry=Polygon(coordinates=[self.point_list]),
+            properties={"name": area_info},
+        )

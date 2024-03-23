@@ -9,9 +9,10 @@ from flight_area.area import Area
 if __name__ == "__main__":
     args = sys.argv
 
-    if args[1] == "--help":
-        print("usage")
-    # TODO: ファイル出力を実装
+    if len(args) >= 2:
+        if args[1] == "--help":
+            print("usage")
+        # TODO: ファイル出力を実装
 
     print("Define Flight Area")
     print("=============================")
@@ -27,9 +28,9 @@ if __name__ == "__main__":
             point = Point(input("Airport Degit: "))
             area_list.append(CircleZone(9, point).get_polygon())
         else:
-            print("<Area" + name + ">")
+            print("<Area: " + name + ">")
 
-            max_altitude = input("Altitude?: ")
+            max_altitude = int(input("Altitude?: "))
 
             point_list: list[Point] = []
             while True:
